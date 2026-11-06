@@ -259,6 +259,8 @@ nav{transition:opacity .8s var(--ease) .5s}
 </style>
 </head>
 <body>
+<script>/* stale-copy guard: phones keep an old page for a while; if the deployed build differs, reload once */
+(function(){var B='20261106223038';if(B==='dev'||!window.fetch)return;fetch('version.txt?'+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(v){v=(v||'').trim();var k='reloaded-'+v;try{if(v&&v!==B&&!sessionStorage.getItem(k)){sessionStorage.setItem(k,'1');location.reload();}}catch(e){}}).catch(function(){});})();</script>
 <script>document.documentElement.classList.add('js','loading');setTimeout(function(){document.documentElement.classList.remove('loading');var l=document.getElementById('loader');if(l)l.classList.add('out');},4500);</script>
 <div id="loader" aria-hidden="true"><div class="ld">
   <div class="brand"><i></i>Edilu Densemo</div>

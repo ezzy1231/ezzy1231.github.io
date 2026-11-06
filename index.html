@@ -25,6 +25,7 @@
   --ease:cubic-bezier(.22,1,.36,1); --r:22px;
   --sec:clamp(96px,14vh,168px); --gh:clamp(28px,4.5vh,48px);
 }
+@media (max-width:760px){:root{--sec:68px;--gh:24px}}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0c0f;--surface:#15171c;--ink:#eef0f4;--muted:#9a9eaa;--line:#24272e;--accent:#f5b13a;--accent-soft:#3a2c12;--veil:rgba(11,12,15,.86);color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#0b0c0f;--surface:#15171c;--ink:#eef0f4;--muted:#9a9eaa;--line:#24272e;--accent:#f5b13a;--accent-soft:#3a2c12;--veil:rgba(11,12,15,.86);color-scheme:dark}
 *{box-sizing:border-box}
@@ -216,7 +217,7 @@ nav{will-change:transform}
 
 /* loader: counts up while the portrait, poster and fonts arrive, then wipes upward */
 #loader{position:fixed;inset:0;z-index:60;background:var(--bg);display:grid;place-items:center;clip-path:inset(0 0 0 0);transition:clip-path 1.1s cubic-bezier(.76,0,.24,1)}
-#loader.out{clip-path:inset(0 0 100% 0)}
+#loader.out{clip-path:inset(0 0 100% 0);pointer-events:none}
 #loader .ld{width:min(440px,80vw);display:grid;gap:18px;transition:opacity .5s var(--ease),transform .8s var(--ease)}
 #loader.out .ld{opacity:0;transform:translateY(-30px)}
 #loader .brand{font-size:18px}
@@ -738,11 +739,11 @@ function fillCase(P){ $('#cTitle').textContent = P.title; $('#cKind').textConten
   $('#cFormat').textContent = P.format; $('#cResult').textContent = P.result; $('#cBrief').textContent = P.brief;
   const i = PROJECTS.indexOf(P), N = PROJECTS[(i+1)%PROJECTS.length]; $('#cNext').textContent = `Next: ${N.title} →`; $('#cNext').onclick = () => swapCase(N); }
 function openCase(T){
-  if (caseOpen) return; caseOpen = true; current = T; SND.open(T.P.id);
+  if (caseOpen) return; caseOpen = true; current = T;
   const r = T.el.getBoundingClientRect();
   fillCase(T.P); caseEl.hidden = false; caseEl.scrollTop = 0; caseEl.classList.remove('ready'); slotSize(T.P);
   lenis && lenis.stop();
-  caseVid = mkVideo(T.P.id); caseVid.currentTime = T.vid ? T.vid.currentTime : 0; caseVid.play().catch(()=>{});
+  caseVid = mkVideo(T.P.id); caseVid.src = `media/case/${T.P.id}.mp4`; caseVid.currentTime = T.vid ? T.vid.currentTime : 0; SND.open(caseVid);
   flyer.innerHTML = ''; flyer.appendChild(caseVid); flyer.hidden = false; T.el.style.visibility = 'hidden';
   F.x.snap(r.left); F.y.snap(r.top); F.w.snap(r.width); F.h.snap(r.height); F.r.snap(20);
   const s = caseSlot.getBoundingClientRect(); F.x.t = s.left; F.y.t = s.top; F.w.t = s.width; F.h.t = s.height; F.r.t = 24; F.bg.t = 1;
@@ -751,15 +752,17 @@ function openCase(T){
 }
 function landIn(){ caseSlot.innerHTML = ''; caseSlot.appendChild(caseVid); flyer.hidden = true; caseEl.classList.add('ready'); fly = null; }
 function closeCase(){
-  if (!caseOpen || fly) return; SND.close();
+  if (!caseOpen || fly) return; caseVid.muted = true;
   const s = caseSlot.getBoundingClientRect(); flyer.innerHTML = ''; flyer.appendChild(caseVid); flyer.hidden = false; caseEl.classList.remove('ready');
   F.x.snap(s.left); F.y.snap(s.top); F.w.snap(s.width); F.h.snap(s.height); F.r.snap(24);
   const r = current.el.getBoundingClientRect(); F.x.t = r.left; F.y.t = r.top; F.w.t = r.width; F.h.t = r.height; F.r.t = 20; F.bg.t = 0;
   fly = 'out'; if (reduce) ['x','y','w','h','r'].forEach(k => F[k].snap(F[k].t));
 }
 function landOut(){ flyer.hidden = true; caseEl.hidden = true; current.el.style.visibility = ''; caseVid.pause(); caseVid = null; caseOpen = false; fly = null; lenis && lenis.start(); current.el.focus({preventScroll:true}); }
-function swapCase(P){ const T = tiles.find(t => t.P === P); SND.open(P.id); current.el.style.visibility = ''; current = T; T.el.style.visibility = 'hidden';
-  caseEl.classList.remove('ready'); setTimeout(() => { fillCase(P); slotSize(P); caseVid.src = `media/${P.id}.mp4`; caseVid.poster = `media/${P.id}.jpg`; caseVid.play().catch(()=>{});
+function swapCase(P){ const T = tiles.find(t => t.P === P); current.el.style.visibility = ''; current = T; T.el.style.visibility = 'hidden';
+  // swap the source inside the tap so the new piece keeps its sound on phones; the text and slot follow after the fade
+  caseVid.poster = `media/${P.id}.jpg`; caseVid.src = `media/case/${P.id}.mp4`; SND.open(caseVid);
+  caseEl.classList.remove('ready'); setTimeout(() => { fillCase(P); slotSize(P);
     caseEl.scrollTo({top:0, behavior: reduce?'auto':'smooth'}); caseEl.classList.add('ready'); }, 350); }
 $('#caseClose').addEventListener('click', closeCase);
 addEventListener('keydown', e => { if (e.key === 'Escape') closeCase(); });
@@ -784,24 +787,19 @@ function stepTrack(){ if (!caseVid || !caseVid.duration) return; const f = caseV
 /* ---------- sound: only inside a case study ----------
    Opening a piece plays that piece's own audio (the click is the user gesture browsers require), locked to its video.
    Everything else on the page is silent. A plain media element keeps it working on iPhone in silent mode. */
+/* case sound lives inside the case video itself (media/case/<id>.mp4 = clip + mix), unmuted inside the tap.
+   One element, so phones allow it (iOS only lets sound start from a tap) and picture and sound can never drift. */
 const SND = (() => {
-  const cas = new Audio(); cas.preload = 'auto'; cas.setAttribute('playsinline','');
   try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch(e){}
-  let muted = false, caseId = null;
+  let muted = false, pref = false; // pref = what the visitor chose; muted = what this case is doing right now
   const btn = $('#caseMute');
   const show = () => { btn.textContent = muted ? 'Sound off' : 'Sound on'; btn.setAttribute('aria-pressed', String(!muted)); };
-  btn.addEventListener('click', () => { muted = !muted; show(); if (muted) cas.pause(); else cas.play().catch(() => {}); });
+  const apply = v => { if (!v) return; v.muted = muted; v.volume = 1; if (muted) v.setAttribute('muted',''); else v.removeAttribute('muted'); };
+  // must be called synchronously inside the click/tap handler
+  function open(v){ muted = pref; show(); apply(v); const p = v.play(); p && p.catch(() => { v.muted = true; v.play().catch(() => {}); muted = true; show(); }); }
+  btn.addEventListener('click', () => { pref = muted = !muted; show(); if (caseVid){ apply(caseVid); caseVid.play().catch(() => {}); } });
   show();
-  function open(id){ caseId = id; cas.src = `media/audio/${id}.mp3`; cas.load(); if (!muted) cas.play().catch(() => {}); }
-  function close(){ caseId = null; cas.pause(); }
-  // every frame: follow the case video's clock (play, pause, seek, loop)
-  function tick(){ if (!caseId) return;
-    const v = caseVid, want = !muted && !document.hidden && v && !v.paused && !v.seeking && v.readyState >= 2;
-    if (!want) { if (!cas.paused) cas.pause(); return; }
-    const at = v.currentTime;
-    if (cas.paused) { if (at < (cas.duration || 99) - .1) { cas.currentTime = at; cas.play().catch(() => {}); } }
-    else if (Math.abs(cas.currentTime - at) > .25) cas.currentTime = at; }
-  return {open, close, tick, get cas(){ return cas; }};
+  return {open, close(){}, tick(){}, get muted(){ return muted; }};
 })();
 
 /* ---------- copy ---------- */
@@ -910,7 +908,7 @@ requestAnimationFrame(frame);
 window.__proto = {openCase: i => openCase(tiles[i]), closeCase, tiles, reelVids, SND,
   bench(n=20){ if (!G) return 'no gl'; const px = new Uint8Array(4), t0 = performance.now();
     for (let i=0;i<n;i++){ drawGL(i*.1, .016); gl.readPixels(0,0,1,1,gl.RGBA,gl.UNSIGNED_BYTE,px); } return ((performance.now()-t0)/n).toFixed(2)+' ms/frame'; },
-  step(sec){ for (let i=0;i<sec*60;i++){ const dt=1/60; stepGrid(dt); stepFly(dt); stepCursor(dt); stepNav(dt); stepStats(dt); stepBand(dt); } }, finishLoader};
+  step(sec){ for (let i=0;i<sec*60;i++){ const dt=1/60; stepGrid(dt); stepFly(dt); stepCursor(dt); stepNav(dt); stepStats(dt); stepBand(dt); } }, finishLoader, ld:() => ({ldLoaded, ldShown, ldDone, el:(performance.now()-ldT0)|0})};
 })();
 </script>
 </body>

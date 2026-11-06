@@ -139,6 +139,10 @@ nav .bar{pointer-events:auto;max-width:1240px;margin:0 auto;display:flex;align-i
 .stack span{font:500 11px var(--mono);padding:6px 9px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
 .sw .go{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
 .sw .go a{text-decoration:none}
+.sw .go{align-items:center}
+.sw .status{display:inline-flex;align-items:center;gap:8px;font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.sw .status i{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:blink 1.6s ease-in-out infinite}
+div.shot{cursor:default}
 @media (max-width:900px){.sw{grid-template-columns:minmax(0,1fr)}.sw:nth-child(even of .sw) .shot{order:0}}
 
 /* about */
@@ -293,7 +297,7 @@ nav{transition:opacity .7s var(--ease) .3s}
 </head>
 <body>
 <script>/* stale-copy guard: phones keep an old page for a while; if the deployed build differs, reload once */
-(function(){var B='20261106225230';if(B==='dev'||!window.fetch)return;fetch('version.txt?'+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(v){v=(v||'').trim();var k='reloaded-'+v;try{if(v&&v!==B&&!sessionStorage.getItem(k)){sessionStorage.setItem(k,'1');location.reload();}}catch(e){}}).catch(function(){});})();</script>
+(function(){var B='20261106225708';if(B==='dev'||!window.fetch)return;fetch('version.txt?'+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(v){v=(v||'').trim();var k='reloaded-'+v;try{if(v&&v!==B&&!sessionStorage.getItem(k)){sessionStorage.setItem(k,'1');location.reload();}}catch(e){}}).catch(function(){});})();</script>
 <script>document.documentElement.classList.add('js','loading');setTimeout(function(){document.documentElement.classList.remove('loading');var l=document.getElementById('loader');if(l)l.classList.add('out');},3300);</script>
 <div id="loader" aria-hidden="true"><div class="ld">
   <div class="brand"><i></i>Edilu Densemo</div>
@@ -360,6 +364,19 @@ nav{transition:opacity .7s var(--ease) .3s}
       <h2 class="split">I ship software, too</h2></div>
 
     <div class="sw-list">
+    <article class="sw">
+      <div class="shot rv" role="img" aria-label="Tibeb app screens: home, a narrated Biology lesson in Amharic, and the subject library">
+        <div class="chrome"><i></i><i></i><i></i><span>Tibeb · iOS and Android</span></div>
+        <div class="win"><img src="media/sw/tibeb.webp" alt="" loading="lazy"></div></div>
+      <div class="txt rv" style="--d:1">
+        <span class="eyebrow">AI learning app · Amharic and English</span>
+        <h3 class="split">Tibeb</h3>
+        <p class="pitch">A mobile learning app for Ethiopian high-school students, in Amharic and English. Every lesson is built from the national textbook: an AI pipeline drafts it from verified pages, each fact carries a citation back to its printed page, and a validator rejects anything it can't trace. Lessons are narrated in one consistent teacher voice and drawn as animated figures, with practice built in.</p>
+        <div class="stack"><span>React Native</span><span>Expo</span><span>TypeScript</span><span>Skia</span><span>Supabase</span><span>pgvector</span><span>Chatterbox TTS</span></div>
+        <div class="go"><button class="btn primary mag" data-case="be-ai"><span class="dot"></span>Watch its ad</button><span class="status"><i></i>In development · Grade 9 in testing</span></div>
+      </div>
+    </article>
+
     <article class="sw">
       <a class="shot rv" href="https://urbanexplore.netlify.app/" target="_blank" rel="noopener" aria-label="Open the UrbanExplore live app">
         <div class="chrome"><i></i><i></i><i></i><span>urbanexplore.netlify.app</span></div>
@@ -442,7 +459,7 @@ nav{transition:opacity .7s var(--ease) .3s}
         <p>I direct and animate 3D and 2D pieces in three.js, WebGL shaders and Canvas, from the first beat sheet to the final mix. My own AI pipeline renders every frame from a timeline I can review shot by shot. Voices come from ElevenLabs and local TTS models, and the sound is real recorded foley, mixed to broadcast loudness. Recent work: a 4K Amharic ad for an AI tutoring app, and an explainer animated word by word to its narration.</p></div>
       <div class="craft rv" style="--d:2"><span class="n">Software</span>
         <h3>Real products, from database to UI</h3>
-        <p>For about two years I've shipped TypeScript and JavaScript products end to end: real-time systems, background job queues, Postgres schemas, Telegram bots and AI voice features. I built and run HabeshaTTS, an Amharic voice-donation platform for streamers, and UrbanExplore, a booking marketplace for Addis Ababa with its security enforced in the database.</p></div>
+        <p>For about two years I've shipped TypeScript and JavaScript products end to end: real-time systems, background job queues, Postgres schemas, Telegram bots and AI voice features. I built and run HabeshaTTS, an Amharic voice-donation platform for streamers, and UrbanExplore, a booking marketplace for Addis Ababa with its security enforced in the database. Now I'm building Tibeb, an AI learning app that turns the national textbook into narrated, cited lessons.</p></div>
     </div>
     <div class="facts rv" style="--d:1">
       <div><span class="eyebrow">Based in</span><b>Addis Ababa · works remotely</b></div>
@@ -890,6 +907,8 @@ $('#copyMail').addEventListener('click', e => { const b = e.currentTarget, txt =
 
 /* ---------- software shots: scroll parallax inside the window + pointer tilt ----------
    uses the individual `rotate` / `translate` properties so it never fights the reveal's `transform` */
+// "Watch its ad" buttons open that piece's case study straight from the software section (inside the tap, so sound works)
+document.querySelectorAll('[data-case]').forEach(b => b.addEventListener('click', () => { const T = tiles.find(t => t.P.id === b.dataset.case); if (T) openCase(T); }));
 const shots = [...document.querySelectorAll('.shot')].map(el => ({el, img: el.querySelector('img'), rx: new Spring(0,140,14), ry: new Spring(0,140,14)}));
 shots.forEach(S2 => { if (!fine || reduce) return;
   S2.el.addEventListener('pointermove', e => { const r = S2.el.getBoundingClientRect(); S2.ry.t = ((e.clientX - r.left)/r.width*2 - 1)*4; S2.rx.t = -((e.clientY - r.top)/r.height*2 - 1)*3; });

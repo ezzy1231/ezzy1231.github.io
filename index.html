@@ -260,7 +260,7 @@ nav{transition:opacity .8s var(--ease) .5s}
 </head>
 <body>
 <script>/* stale-copy guard: phones keep an old page for a while; if the deployed build differs, reload once */
-(function(){var B='20261106223038';if(B==='dev'||!window.fetch)return;fetch('version.txt?'+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(v){v=(v||'').trim();var k='reloaded-'+v;try{if(v&&v!==B&&!sessionStorage.getItem(k)){sessionStorage.setItem(k,'1');location.reload();}}catch(e){}}).catch(function(){});})();</script>
+(function(){var B='20261106223517';if(B==='dev'||!window.fetch)return;fetch('version.txt?'+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(v){v=(v||'').trim();var k='reloaded-'+v;try{if(v&&v!==B&&!sessionStorage.getItem(k)){sessionStorage.setItem(k,'1');location.reload();}}catch(e){}}).catch(function(){});})();</script>
 <script>document.documentElement.classList.add('js','loading');setTimeout(function(){document.documentElement.classList.remove('loading');var l=document.getElementById('loader');if(l)l.classList.add('out');},4500);</script>
 <div id="loader" aria-hidden="true"><div class="ld">
   <div class="brand"><i></i>Edilu Densemo</div>
@@ -294,8 +294,8 @@ nav{transition:opacity .8s var(--ease) .5s}
     <h1 class="bigname" id="kinetic" aria-label="Edilu Densemo"><span class="ln"><span>Edilu</span></span><span class="ln"><span>Densemo</span></span></h1>
     <img id="portrait" src="media/edilu.webp" alt="Portrait of Edilu Densemo in a denim jacket">
     <div class="copy">
-      <span class="eyebrow">AI motion designer · developer</span>
-      <p class="lede"><b>Motion that never cuts.</b>I direct 3D and 2D motion with an AI pipeline I built myself, and I ship the full-stack software behind real products.</p>
+      <span class="eyebrow">Motion design · Full-stack</span>
+      <p class="lede"><b>Ads that move.<br>Software that ships.</b>I direct 3D and 2D ads in code, voiced and scored through an AI pipeline I built myself. I also ship full-stack products, from the database to the last pixel.</p>
     </div>
     <div class="ctas">
       <button class="btn primary mag" data-to="#reel"><span class="dot"></span>Watch the reel</button>
@@ -306,7 +306,7 @@ nav{transition:opacity .8s var(--ease) .5s}
   <section class="pad" id="reel"><div class="wrap reel">
     <div class="head"><div class="chap"><span class="n">01</span><span class="t">Showreel</span><i></i><span class="of">01 / 04</span></div>
       <div class="row"><h2 class="split">Showreel 2026</h2>
-      <div class="reel-meta rv" style="--d:3"><span>Now playing <b id="reelName">Vela Pro</b></span><span>Muted · open a piece for sound</span></div></div></div>
+      <div class="reel-meta rv" style="--d:3"><span>Now playing <b id="reelName">Vela Pro</b></span><span>Muted here · sound plays inside each piece</span></div></div></div>
     <div id="reelSlot"><video class="fallback" muted playsinline loop autoplay poster="media/vela.jpg" src="media/vela.mp4"></video></div>
   </div></section>
 
@@ -322,7 +322,7 @@ nav{transition:opacity .8s var(--ease) .5s}
 
   <section class="pad" id="software"><div class="wrap software">
     <div class="head"><div class="chap"><span class="n">03</span><span class="t">Software</span><i></i><span class="of">03 / 04</span></div>
-      <h2 class="split">I ship the software too</h2></div>
+      <h2 class="split">I ship software, too</h2></div>
 
     <div class="sw-list">
     <article class="sw">
@@ -332,7 +332,7 @@ nav{transition:opacity .8s var(--ease) .5s}
       <div class="txt rv" style="--d:1">
         <span class="eyebrow">Full-stack marketplace · Addis Ababa</span>
         <h3 class="split">UrbanExplore</h3>
-        <p class="pitch">A city guide and booking app for Addis Ababa. People can find restaurants, reserve a table, buy event tickets and check the taxi fare before they leave home. Restaurants, event organizers and admins each get their own dashboard. I built it end to end, with the security rules living in the database itself, so nobody can see or change data that isn't theirs.</p>
+        <p class="pitch">Dinner, a show and the ride there, planned in one place. UrbanExplore lets people in Addis Ababa find restaurants, reserve a table, buy event tickets and see the taxi fare before they leave home. Restaurants, organizers and admins each run their own dashboard. I built it end to end, with access rules enforced inside the database, so no one can see or change data that isn't theirs.</p>
         <div class="stack"><span>Next.js 14</span><span>Supabase</span><span>PostgreSQL</span><span>PL/pgSQL</span><span>Leaflet</span><span>Turborepo</span></div>
         <div class="go"><a class="btn primary mag" href="https://urbanexplore.netlify.app/" target="_blank" rel="noopener"><span class="dot"></span>Live app</a><a class="btn ghost mag" href="https://github.com/ezzy1231/UrbanExplore-Addis-Ababa" target="_blank" rel="noopener">Code</a></div>
       </div>
@@ -345,7 +345,7 @@ nav{transition:opacity .8s var(--ease) .5s}
       <div class="txt rv" style="--d:1">
         <span class="eyebrow">AI voice platform · Amharic</span>
         <h3 class="split">HabeshaTTS</h3>
-        <p class="pitch">A platform that lets fans send paid voice messages to Amharic-speaking streamers. A fan tops up and writes a message in a Telegram bot, picks one of twelve AI voices, and the message is read aloud on the stream in natural Amharic within seconds. Streamers get a live dashboard for their queue and earnings, and admins approve payments and moderate messages.</p>
+        <p class="pitch">Paid voice shout-outs for Amharic-speaking streamers. A fan tops up in a Telegram bot, writes a message and picks one of twelve AI voices. Seconds later it's read aloud on stream in natural Amharic. Streamers watch their queue and earnings live, and admins approve payments and moderate messages.</p>
         <div class="stack"><span>Node</span><span>Express</span><span>PostgreSQL</span><span>Redis · BullMQ</span><span>Socket.IO</span><span>Gemini TTS</span><span>Docker</span></div>
         <div class="go"><a class="btn primary mag" href="https://habeshatts.com/" target="_blank" rel="noopener"><span class="dot"></span>Website</a><a class="btn ghost mag" href="https://github.com/ezzy1231/habesha_tts" target="_blank" rel="noopener">Code</a></div>
       </div>
@@ -360,36 +360,36 @@ nav{transition:opacity .8s var(--ease) .5s}
 
   <section class="pad" id="about"><div class="wrap">
     <div class="head"><div class="chap"><span class="n">04</span><span class="t">About</span><i></i><span class="of">04 / 04</span></div>
-      <p class="big split">I'm Edilu, an <em>AI motion designer</em> and <em>full-stack developer</em> in Addis Ababa. I make ads that move like film, and I build the software they advertise.</p></div>
+      <p class="big split">I'm Edilu, an <em>AI motion designer</em> and <em>full-stack developer</em> in Addis Ababa. I make ads that move like film, and I build products that hold up in production.</p></div>
     <div class="stats" id="stats">
       <div><b data-count="5">5</b><span class="eyebrow">Motion pieces</span></div>
       <div><b data-count="2">2</b><span class="eyebrow">Live products</span></div>
       <div><b data-count="12">12</b><span class="eyebrow">AI voices in production</span></div>
-      <div><b data-count="4" data-suf="K">4<sup>K</sup></b><span class="eyebrow">Max delivery</span></div>
+      <div><b data-count="4" data-suf="K">4<sup>K</sup></b><span class="eyebrow">Delivery resolution</span></div>
     </div>
     <div class="crafts">
       <div class="craft rv" style="--d:1"><span class="n">Motion</span>
         <h3>Ads and product films, built in code</h3>
-        <p>I direct and animate 3D and 2D pieces in three.js, WebGL shaders and Canvas, from the first beat sheet to the final mix. I built my own AI pipeline for it: every frame is rendered from a timeline I can check shot by shot, voice-overs come from ElevenLabs and local TTS models, and sound is real recorded foley mixed to broadcast loudness. Recent work includes a 4K Amharic ad for an AI tutoring app and a narrated explainer timed word by word to its voice.</p></div>
+        <p>I direct and animate 3D and 2D pieces in three.js, WebGL shaders and Canvas, from the first beat sheet to the final mix. My own AI pipeline renders every frame from a timeline I can review shot by shot. Voices come from ElevenLabs and local TTS models, and the sound is real recorded foley, mixed to broadcast loudness. Recent work: a 4K Amharic ad for an AI tutoring app, and an explainer animated word by word to its narration.</p></div>
       <div class="craft rv" style="--d:2"><span class="n">Software</span>
         <h3>Real products, from database to UI</h3>
-        <p>I've spent about two years shipping TypeScript and JavaScript products end to end: real-time systems, background job queues, Postgres schemas, Telegram bots and AI voice features. I built and run HabeshaTTS, an Amharic voice-donation platform for streamers, and UrbanExplore, a booking marketplace for Addis Ababa with security enforced in the database.</p></div>
+        <p>For about two years I've shipped TypeScript and JavaScript products end to end: real-time systems, background job queues, Postgres schemas, Telegram bots and AI voice features. I built and run HabeshaTTS, an Amharic voice-donation platform for streamers, and UrbanExplore, a booking marketplace for Addis Ababa with its security enforced in the database.</p></div>
     </div>
     <div class="facts rv" style="--d:1">
-      <div><span class="eyebrow">Based in</span><b>Addis Ababa · remote</b></div>
+      <div><span class="eyebrow">Based in</span><b>Addis Ababa · works remotely</b></div>
       <div><span class="eyebrow">Education</span><b>BSc Computer Science, Unity University, 2025</b></div>
       <div><span class="eyebrow">Languages</span><b>Amharic (native) · English (fluent)</b></div>
-      <div><span class="eyebrow">Open to</span><b>Freelance, contract and full-time roles</b></div>
+      <div><span class="eyebrow">Open to</span><b>Freelance, contract and full-time work</b></div>
     </div>
     <div class="about">
-      <p class="big rv" style="font-size:clamp(26px,2.8vw,38px)">Have a product that needs to move, or software that needs building? <em>Let's talk.</em></p>
+      <p class="big rv" style="font-size:clamp(26px,2.8vw,38px)">Got a product that needs to move, or software that needs to ship? <em>Let's talk.</em></p>
       <div class="contact rv" style="--d:2">
         <span class="eyebrow">Contact</span>
         <div class="mail"><span id="mailText">ediludensemo1@gmail.com</span><button id="copyMail" class="mag">Copy</button></div>
         <div class="socials"><a href="mailto:ediludensemo1@gmail.com">Email</a><a href="https://www.linkedin.com/in/edilu-densemo-tafesse-933571312/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/ezzy1231" target="_blank" rel="noopener">GitHub</a><a href="https://www.instagram.com/its.ez1/" target="_blank" rel="noopener">Instagram</a><a href="cv.html" target="_blank" rel="noopener">CV</a></div>
       </div>
     </div>
-    <footer><span>© 2026 Edilu Densemo Tafesse</span><span>AI motion design · full-stack development</span></footer>
+    <footer><span>© 2026 Edilu Densemo Tafesse</span><span>Motion design and full-stack development</span></footer>
   </div></section>
 </main>
 
@@ -420,20 +420,20 @@ nav{transition:opacity .8s var(--ease) .5s}
 document.documentElement.classList.add('js');
 const PROJECTS = [
   {id:'vela', title:'Vela Pro', kind:'Product launch film', aspect:16/9, tags:['3D','2D','Ad'],
-   role:'Direction, UI motion, sound design', tools:'HTML, Canvas, motion-kit, recorded SFX', format:'24 s · 16:9 · 1080p', result:'Launch film with full SFX mix',
-   brief:'A launch film for a pro motion-design app. Panels lift out of the window, a graph editor shapes a curve, a team edits one timeline live, and the keyframes fly into the app icon, scored with sound design only.'},
+   role:'Direction, UI motion, sound design', tools:'HTML Canvas, motion-kit, recorded foley', format:'24 s · 16:9 · 1080p', result:'Launch film with a full sound-design mix',
+   brief:'A launch film for Vela Pro, a motion-design app for teams. Panels lift off the window, a curve bends in the graph editor, three people edit one timeline live, and every keyframe flies home into the app icon. Scored with sound design alone, no music.'},
   {id:'unhaunt', title:'Unhaunt', kind:'Narrated explainer ad', aspect:16/9, tags:['2D','3D','Ad','AI voice'],
-   role:'Direction, motion, voice, sound', tools:'three.js, Canvas, Chatterbox TTS', format:'36 s · 16:9', result:'Published with full mix',
-   brief:'Forgotten subscriptions become clay ghosts that haunt your bank balance. A 36-second narrated explainer, timed word by word to its AI voice-over.'},
+   role:'Direction, motion, voice, sound', tools:'three.js, Canvas, Chatterbox TTS', format:'36 s · 16:9', result:'Final cut with a full voice and SFX mix',
+   brief:'Forgotten subscriptions turn into little clay ghosts that haunt your bank balance. A 36-second explainer, animated word by word to its AI voice-over.'},
   {id:'be-ai', title:'Be AI', kind:'Amharic app ad', aspect:9/16, tags:['3D','Ad','AI voice'],
-   role:'Direction, 3D, Amharic copy, mix', tools:'three.js, ElevenLabs, recorded SFX', format:'24 s · 9:16 · 4K', result:'Approved final, delivered in 4K',
-   brief:'An ad for an AI tutoring app, written to sound like native Amharic speech. A titanium 3D iPhone shows real lesson screens on a warm study-notebook page.'},
+   role:'Direction, 3D, Amharic copy, mix', tools:'three.js, ElevenLabs, recorded SFX', format:'24 s · 9:16 · 4K', result:'Approved and delivered in 4K',
+   brief:'An ad for an AI tutoring app, written to sound like everyday spoken Amharic, not a translation. A titanium 3D iPhone walks through real lesson screens on a warm notebook page.'},
   {id:'kori', title:'Kōri Sparkling Yuzu', kind:'Product ad', aspect:4/5, tags:['3D','2D','Ad'],
-   role:'Concept, 3D, motion', tools:'three.js, motion-kit', format:'15 s · 4:5', result:'Polished v2 for social',
-   brief:'A cold, bright product film for a yuzu soda: an ice-cold can, fizz and a clean logo lock-up, built to stop the scroll in the first second.'},
+   role:'Concept, 3D, motion', tools:'three.js, motion-kit', format:'15 s · 4:5', result:'Final cut for social',
+   brief:'An ice-cold can, rising fizz and a clean logo lock-up. A bright product film for a yuzu soda, built to stop the scroll in the first second.'},
   {id:'pulse', title:'Pulse One', kind:'3D product teaser', aspect:16/9, tags:['3D'],
-   role:'3D, lighting, camera', tools:'three.js, custom shaders', format:'10 s · 16:9', result:'Premium watch teaser',
-   brief:'A ten-second teaser for a smartwatch: studio lighting, slow camera moves and a reveal that lands on the beat.'},
+   role:'3D, lighting, camera', tools:'three.js, custom shaders', format:'10 s · 16:9', result:'Hero teaser for a watch launch',
+   brief:'A ten-second smartwatch teaser. Studio light, slow camera moves and a reveal that lands right on the beat.'},
 ];
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine = matchMedia('(pointer: fine)').matches;

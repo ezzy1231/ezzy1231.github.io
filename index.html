@@ -79,7 +79,7 @@ nav .bar{pointer-events:auto;max-width:1240px;margin:0 auto;display:flex;align-i
 .hero .lede b{display:block;color:var(--ink);font-weight:600;font-size:20px;letter-spacing:-.02em;margin-bottom:6px}
 @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .ctas{display:flex;flex-wrap:wrap;gap:10px}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;border-radius:999px;font-weight:550;font-size:15px;will-change:transform}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:14px 20px;border-radius:999px;font-weight:550;font-size:15px;will-change:transform}
 .btn.primary{background:var(--ink);color:var(--bg)}
 .btn.ghost{border:1px solid var(--line);background:var(--surface)}
 .btn .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
@@ -259,11 +259,41 @@ nav{transition:opacity .7s var(--ease) .3s}
 .band .mq.out{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
 .band .dt{display:inline-block;width:.2em;height:.2em;border-radius:50%;background:var(--accent);flex:none}
 @media (prefers-reduced-motion:reduce){#loader{display:none}.js .split .w>i,.js .chap i{transform:none}.js .chap .t,.js .chap .of{opacity:1}}
+
+/* AI engineering: services, ways to work, demo slots */
+.ai{padding-top:var(--sec);display:grid;gap:var(--gh)}
+.ai-lede{font-size:clamp(18px,1.7vw,22px);line-height:1.5;letter-spacing:-.01em;color:var(--muted);max-width:60ch}
+.ai-lede b{color:var(--ink);font-weight:550}
+.svc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.svc article{position:relative;overflow:hidden;background:var(--surface);border-radius:var(--r);padding:clamp(22px,2.6vw,34px);display:grid;gap:12px;align-content:start}
+.svc article::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .8s var(--ease)}
+.svc article:hover::after{transform:none}
+.svc .n{font:500 12px var(--mono);color:var(--accent);letter-spacing:.08em}
+.svc h3{font-size:clamp(22px,2vw,28px);font-weight:600;letter-spacing:-.03em}
+.svc p{color:var(--muted);line-height:1.6}
+.svc .stack{margin-top:6px}
+.ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ways div{border-top:1px solid var(--ink);padding-top:16px;display:grid;gap:8px;align-content:start}
+.ways b{font-size:18px;font-weight:600;letter-spacing:-.02em}
+.ways p{color:var(--muted);font-size:15px;line-height:1.55}
+.demos{display:grid;gap:16px}
+.demo-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.demo{position:relative;overflow:hidden;min-height:220px;border:1px dashed color-mix(in srgb,var(--muted) 45%,transparent);border-radius:var(--r);padding:22px;display:grid;gap:8px;align-content:end}
+.demo::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,var(--accent-soft) 50%,transparent 70%);background-size:250% 100%;opacity:.55;animation:build 3.6s var(--ease) infinite}
+.demo>*{position:relative}
+.demo .soon{position:absolute;top:18px;left:18px;display:flex;align-items:center;gap:8px;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.demo .soon i{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:blink 1.6s ease-in-out infinite}
+.demo h4{margin:0;font-size:19px;font-weight:600;letter-spacing:-.02em}
+.demo p{color:var(--muted);font-size:15px;line-height:1.55}
+@keyframes build{from{background-position:120% 0}to{background-position:-20% 0}}
+@keyframes blink{50%{opacity:.25}}
+@media (max-width:900px){.svc,.ways,.demo-row{grid-template-columns:minmax(0,1fr)}.demo{min-height:170px}}
+@media (prefers-reduced-motion:reduce){.demo::before,.demo .soon i{animation:none}}
 </style>
 </head>
 <body>
 <script>/* stale-copy guard: phones keep an old page for a while; if the deployed build differs, reload once */
-(function(){var B='20261106224410';if(B==='dev'||!window.fetch)return;fetch('version.txt?'+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(v){v=(v||'').trim();var k='reloaded-'+v;try{if(v&&v!==B&&!sessionStorage.getItem(k)){sessionStorage.setItem(k,'1');location.reload();}}catch(e){}}).catch(function(){});})();</script>
+(function(){var B='20261106224747';if(B==='dev'||!window.fetch)return;fetch('version.txt?'+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(v){v=(v||'').trim();var k='reloaded-'+v;try{if(v&&v!==B&&!sessionStorage.getItem(k)){sessionStorage.setItem(k,'1');location.reload();}}catch(e){}}).catch(function(){});})();</script>
 <script>document.documentElement.classList.add('js','loading');setTimeout(function(){document.documentElement.classList.remove('loading');var l=document.getElementById('loader');if(l)l.classList.add('out');},3300);</script>
 <div id="loader" aria-hidden="true"><div class="ld">
   <div class="brand"><i></i>Edilu Densemo</div>
@@ -276,8 +306,9 @@ nav{transition:opacity .7s var(--ease) .3s}
   <button data-to="#reel"><span>Showreel</span></button>
   <button data-to="#work"><span>Work</span></button>
   <button data-to="#software"><span>Software</span></button>
+  <button data-to="#ai"><span>AI</span></button>
   <button data-to="#about"><span>About</span></button>
-  <div class="num"><b id="railNum">01</b> / 04</div>
+  <div class="num"><b id="railNum">01</b> / 05</div>
 </aside>
 <div id="cursor" aria-hidden="true">View case</div>
 
@@ -286,6 +317,7 @@ nav{transition:opacity .7s var(--ease) .3s}
   <div class="links">
     <button data-to="#work">Work</button>
     <button data-to="#software">Software</button>
+    <button data-to="#ai" class="hide-s">AI</button>
     <button data-to="#about" class="hide-s">About</button>
     <a class="cv mag" href="cv.html" target="_blank" rel="noopener">CV</a>
   </div>
@@ -298,7 +330,7 @@ nav{transition:opacity .7s var(--ease) .3s}
     <img id="portrait" src="media/edilu-1000.webp" srcset="media/edilu-1000.webp 1000w, media/edilu-1500.webp 1500w, media/edilu.webp 2012w" sizes="(max-width:1000px) 100vw, min(62vw, 1160px)" fetchpriority="high" decoding="async" alt="Portrait of Edilu Densemo in a denim jacket">
     <div class="copy">
       <span class="eyebrow">Motion design · Full-stack</span>
-      <p class="lede"><b>Ads that move.<br>Software that ships.</b>I direct 3D and 2D ads in code, voiced and scored through an AI pipeline I built myself. I also ship full-stack products, from the database to the last pixel.</p>
+      <p class="lede"><b>Ads that move.<br>Software that ships.</b>I direct 3D and 2D ads in code, voiced and scored through an AI pipeline I built myself. I also ship full-stack products and AI features, from the database to the last pixel.</p>
     </div>
     <div class="ctas">
       <button class="btn primary mag" data-to="#reel"><span class="dot"></span>Watch the reel</button>
@@ -307,14 +339,14 @@ nav{transition:opacity .7s var(--ease) .3s}
   </div></section>
 
   <section class="pad" id="reel"><div class="wrap reel">
-    <div class="head"><div class="chap"><span class="n">01</span><span class="t">Showreel</span><i></i><span class="of">01 / 04</span></div>
+    <div class="head"><div class="chap"><span class="n">01</span><span class="t">Showreel</span><i></i><span class="of">01 / 05</span></div>
       <div class="row"><h2 class="split">Showreel 2026</h2>
       <div class="reel-meta rv" style="--d:3"><span>Now playing <b id="reelName">Vela Pro</b></span><span>Muted here · sound plays inside each piece</span></div></div></div>
     <div id="reelSlot"><video class="fallback" muted playsinline loop preload="none" poster="media/vela.jpg" data-src="media/vela.mp4"></video></div>
   </div></section>
 
   <section class="pad" id="work"><div class="wrap work">
-    <div class="head"><div class="chap"><span class="n">02</span><span class="t">Selected work</span><i></i><span class="of">02 / 04</span></div>
+    <div class="head"><div class="chap"><span class="n">02</span><span class="t">Selected work</span><i></i><span class="of">02 / 05</span></div>
       <div class="row"><h2 class="split">Five pieces, one pipeline</h2>
       <div class="filters rv" style="--d:3" role="group" aria-label="Filter work"><span class="pill" aria-hidden="true"></span>
         <button aria-pressed="true" data-f="all">All</button><button aria-pressed="false" data-f="3D">3D</button><button aria-pressed="false" data-f="2D">2D</button><button aria-pressed="false" data-f="Ad">Ads</button><button aria-pressed="false" data-f="AI voice">AI voice</button>
@@ -324,7 +356,7 @@ nav{transition:opacity .7s var(--ease) .3s}
   </div></section>
 
   <section class="pad" id="software"><div class="wrap software">
-    <div class="head"><div class="chap"><span class="n">03</span><span class="t">Software</span><i></i><span class="of">03 / 04</span></div>
+    <div class="head"><div class="chap"><span class="n">03</span><span class="t">Software</span><i></i><span class="of">03 / 05</span></div>
       <h2 class="split">I ship software, too</h2></div>
 
     <div class="sw-list">
@@ -356,13 +388,47 @@ nav{transition:opacity .7s var(--ease) .3s}
     </div>
   </div></section>
 
+  <section class="pad" id="ai"><div class="wrap ai">
+    <div class="head"><div class="chap"><span class="n">04</span><span class="t">AI engineering</span><i></i><span class="of">04 / 05</span></div>
+      <div class="row"><h2 class="split">AI that works in production</h2>
+      <a class="btn primary mag rv" style="--d:3" href="mailto:ediludensemo1@gmail.com?subject=AI%20engineering%20enquiry"><span class="dot"></span>Book a consult</a></div></div>
+    <p class="ai-lede rv">I build AI into real products, and I help teams decide where it belongs. <b>Hire me as a consultant or as a hands-on engineer</b>, from the first idea to a feature your users rely on.</p>
+    <div class="svc">
+      <article class="rv"><span class="n">01</span><h3>Voice and speech</h3>
+        <p>Text-to-speech, voice-overs and voice features, including Amharic and other languages most tools get wrong. It already runs in production on HabeshaTTS.</p>
+        <div class="stack"><span>ElevenLabs</span><span>Gemini TTS</span><span>Chatterbox</span><span>Kokoro</span></div></article>
+      <article class="rv" style="--d:1"><span class="n">02</span><h3>LLM features and agents</h3>
+        <p>Chat, search, extraction and tool-using agents inside your app or a Telegram bot, with guardrails, quality checks and a cost ceiling.</p>
+        <div class="stack"><span>Gemini</span><span>Claude</span><span>OpenAI</span><span>Ollama</span></div></article>
+      <article class="rv"><span class="n">03</span><h3>AI pipelines and automation</h3>
+        <p>Background jobs that generate, check and deliver content at scale, with queues, retries, moderation and human review where it matters. My own ad pipeline renders, voices and mixes video this way.</p>
+        <div class="stack"><span>Node.js</span><span>BullMQ</span><span>Redis</span><span>ffmpeg</span></div></article>
+      <article class="rv" style="--d:1"><span class="n">04</span><h3>Consulting</h3>
+        <p>A clear plan before you spend on building: which problems AI should solve, build or buy, model choice, privacy, cost per user and how to measure quality.</p>
+        <div class="stack"><span>Workshops</span><span>Audits</span><span>Roadmaps</span></div></article>
+    </div>
+    <div class="ways">
+      <div class="rv"><span class="eyebrow">Advise</span><b>Advisory call</b><p>A focused session on your idea or product, with a written plan you can act on.</p></div>
+      <div class="rv" style="--d:1"><span class="eyebrow">Prove</span><b>Prototype</b><p>A working demo on your own data, so you can see it before you commit.</p></div>
+      <div class="rv" style="--d:2"><span class="eyebrow">Ship</span><b>Build</b><p>I build the feature end to end and hand it over to your team, documented.</p></div>
+    </div>
+    <div class="demos">
+      <div class="chap rv" style="gap:12px"><span class="t" style="opacity:1">Demos</span><i style="transform:none"></i><span class="of" style="opacity:1">3 in the works</span></div>
+      <div class="demo-row">
+        <div class="demo rv"><span class="soon"><i></i>In progress</span><h4>Amharic voice agent</h4><p>Ask a question out loud in Amharic and hear a spoken answer back.</p></div>
+        <div class="demo rv" style="--d:1"><span class="soon"><i></i>In progress</span><h4>Ask your documents</h4><p>Answers from a company's own files, in Amharic or English, with the source for every answer.</p></div>
+        <div class="demo rv" style="--d:2"><span class="soon"><i></i>In progress</span><h4>Brief to ad</h4><p>A product brief goes in, and a voiced, animated draft ad comes out, built on my motion pipeline.</p></div>
+      </div>
+    </div>
+  </div></section>
+
   <section class="band" id="band" aria-hidden="true">
     <div class="mq"><span>Motion<i class="dt"></i>3D<i class="dt"></i>Sound<i class="dt"></i>AI voice<i class="dt"></i></span><span>Motion<i class="dt"></i>3D<i class="dt"></i>Sound<i class="dt"></i>AI voice<i class="dt"></i></span></div>
-    <div class="mq out"><span>Software<i class="dt"></i>Real-time<i class="dt"></i>Databases<i class="dt"></i>Bots<i class="dt"></i></span><span>Software<i class="dt"></i>Real-time<i class="dt"></i>Databases<i class="dt"></i>Bots<i class="dt"></i></span></div>
+    <div class="mq out"><span>Software<i class="dt"></i>Real-time<i class="dt"></i>AI agents<i class="dt"></i>Bots<i class="dt"></i></span><span>Software<i class="dt"></i>Real-time<i class="dt"></i>AI agents<i class="dt"></i>Bots<i class="dt"></i></span></div>
   </section>
 
   <section class="pad" id="about"><div class="wrap">
-    <div class="head"><div class="chap"><span class="n">04</span><span class="t">About</span><i></i><span class="of">04 / 04</span></div>
+    <div class="head"><div class="chap"><span class="n">05</span><span class="t">About</span><i></i><span class="of">05 / 05</span></div>
       <p class="big split">I'm Edilu, an <em>AI motion designer</em> and <em>full-stack developer</em> in Addis Ababa. I make ads that move like film, and I build products that hold up in production.</p></div>
     <div class="stats" id="stats">
       <div><b data-count="5">5</b><span class="eyebrow">Motion pieces</span></div>
@@ -382,17 +448,17 @@ nav{transition:opacity .7s var(--ease) .3s}
       <div><span class="eyebrow">Based in</span><b>Addis Ababa · works remotely</b></div>
       <div><span class="eyebrow">Education</span><b>BSc Computer Science, Unity University, 2025</b></div>
       <div><span class="eyebrow">Languages</span><b>Amharic (native) · English (fluent)</b></div>
-      <div><span class="eyebrow">Open to</span><b>Freelance, contract and full-time work</b></div>
+      <div><span class="eyebrow">Open to</span><b>Freelance, contract, full-time work and AI consulting</b></div>
     </div>
     <div class="about">
-      <p class="big rv" style="font-size:clamp(26px,2.8vw,38px)">Got a product that needs to move, or software that needs to ship? <em>Let's talk.</em></p>
+      <p class="big rv" style="font-size:clamp(26px,2.8vw,38px)">Got a product that needs to move, software that needs to ship, or AI that has to work? <em>Let's talk.</em></p>
       <div class="contact rv" style="--d:2">
         <span class="eyebrow">Contact</span>
         <div class="mail"><span id="mailText">ediludensemo1@gmail.com</span><button id="copyMail" class="mag">Copy</button></div>
         <div class="socials"><a href="mailto:ediludensemo1@gmail.com">Email</a><a href="https://www.linkedin.com/in/edilu-densemo-tafesse-933571312/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/ezzy1231" target="_blank" rel="noopener">GitHub</a><a href="https://www.instagram.com/its.ez1/" target="_blank" rel="noopener">Instagram</a><a href="cv.html" target="_blank" rel="noopener">CV</a></div>
       </div>
     </div>
-    <footer><span>© 2026 Edilu Densemo Tafesse</span><span>Motion design and full-stack development</span></footer>
+    <footer><span>© 2026 Edilu Densemo Tafesse</span><span>Motion design, full-stack and AI engineering</span></footer>
   </div></section>
 </main>
 
@@ -872,7 +938,7 @@ function stepLoader(dt){ if (ldDone) return; const el = (performance.now() - ldT
 
 /* ---------- section rail ---------- */
 const rail = $('#rail'), railBtns = [...rail.querySelectorAll('button')], railNum = $('#railNum');
-const railSecs = ['#reel','#work','#software','#about'].map(s => $(s)); let railIdx = -2;
+const railSecs = ['#reel','#work','#software','#ai','#about'].map(s => $(s)); let railIdx = -2;
 const railMQ = matchMedia('(min-width: 1400px) and (pointer: fine)');
 function stepRail(){ if (!railMQ.matches) return;
   let a = -1; const mid = innerHeight*.5; railSecs.forEach((s,i) => { if (s.getBoundingClientRect().top < mid) a = i; });

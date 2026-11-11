@@ -150,6 +150,37 @@ nav .bar{pointer-events:auto;max-width:1240px;margin:0 auto;display:flex;align-i
 .sw .status i{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:blink 1.6s ease-in-out infinite}
 div.shot{cursor:default}
 @media (max-width:900px){.sw{grid-template-columns:minmax(0,1fr)}.sw:nth-child(even of .sw) .shot{order:0}}
+/* Tibeb lessons: real pages recorded from the app, one phone per page */
+.lessons{display:grid;gap:28px;margin-top:calc(clamp(72px,12vh,140px)*-.45)}
+.lessons .lhead{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,56px);align-items:end}
+.lessons h3{font-size:clamp(26px,2.6vw,36px);font-weight:650;letter-spacing:-.035em;line-height:1.1;margin-top:10px}
+.lessons .lede{font-size:17px;line-height:1.6;color:var(--muted);max-width:56ch}
+.lnums{display:flex;gap:28px;flex-wrap:wrap}
+.lnums div{display:grid;gap:6px}
+.lnums b{font-size:clamp(28px,3vw,40px);font-weight:650;letter-spacing:-.04em;line-height:1}
+.phones{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 18px;scrollbar-width:thin;overscroll-behavior-x:contain}
+.phone{flex:0 0 clamp(196px,19vw,236px);scroll-snap-align:start;display:grid;gap:12px;margin:0}
+.phone button{all:unset;cursor:pointer;display:grid;gap:12px;width:100%}
+.phone .scr{position:relative;display:block;aspect-ratio:1/2;border-radius:28px;overflow:hidden;background:#0b1530;border:6px solid var(--ink);box-shadow:0 26px 50px -28px rgba(20,22,30,.55);transition:transform .5s var(--ease)}
+.phone button:hover .scr{transform:translateY(-4px)}
+.phone button:focus-visible .scr{outline:2px solid var(--accent);outline-offset:4px}
+.phone.on .scr{border-color:var(--accent)}
+.phone video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.phone .cap{display:grid;gap:4px;justify-items:start}
+.phone .cap b{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.phone .cap>span:not(.snd){font:500 11px/1.4 var(--mono);color:var(--muted)}
+.phone .snd{margin-top:6px;display:inline-flex;align-items:center;gap:7px;padding:7px 11px 7px 9px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 11px/1 var(--mono);letter-spacing:.04em}
+.phone .snd i{width:7px;height:7px;border-radius:50%;background:var(--muted)}
+.phone.on .snd i{background:var(--accent);animation:blink 1.2s ease-in-out infinite}
+.lprin{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.lprin div{border-top:1px solid var(--ink);padding-top:14px;display:grid;gap:8px;align-content:start}
+.lprin b{font-size:16px;font-weight:600;letter-spacing:-.015em}
+.lprin p{color:var(--muted);font-size:14.5px;line-height:1.55}
+.lcourse{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.lcourse .eyebrow{margin-right:6px}
+.lcourse span:not(.eyebrow){font:500 11px var(--mono);padding:6px 9px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+@media (max-width:900px){.lessons .lhead{grid-template-columns:minmax(0,1fr)}.lprin{grid-template-columns:repeat(2,minmax(0,1fr))}.lessons{margin-top:0}}
+@media (max-width:520px){.lprin{grid-template-columns:minmax(0,1fr)}.phone{flex-basis:62vw}}
 
 /* about */
 #about>.wrap{padding-top:var(--sec);display:grid;gap:clamp(48px,8vh,88px)}
@@ -303,7 +334,7 @@ nav{transition:opacity .7s var(--ease) .3s}
 </head>
 <body>
 <script>/* stale-copy guard: phones keep an old page for a while; if the deployed build differs, reload once */
-(function(){var B='20261106230741';if(B==='dev'||!window.fetch)return;fetch('version.txt?'+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(v){v=(v||'').trim();var k='reloaded-'+v;try{if(v&&v!==B&&!sessionStorage.getItem(k)){sessionStorage.setItem(k,'1');location.reload();}}catch(e){}}).catch(function(){});})();</script>
+(function(){var B='20261111215914';if(B==='dev'||!window.fetch)return;fetch('version.txt?'+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(v){v=(v||'').trim();var k='reloaded-'+v;try{if(v&&v!==B&&!sessionStorage.getItem(k)){sessionStorage.setItem(k,'1');location.reload();}}catch(e){}}).catch(function(){});})();</script>
 <script>document.documentElement.classList.add('js','loading');setTimeout(function(){document.documentElement.classList.remove('loading');var l=document.getElementById('loader');if(l)l.classList.add('out');},3300);</script>
 <div id="loader" aria-hidden="true"><div class="ld">
   <div class="brand"><i></i>Edilu Densemo</div>
@@ -379,9 +410,37 @@ nav{transition:opacity .7s var(--ease) .3s}
         <h3 class="split">Tibeb</h3>
         <p class="pitch">A mobile learning app for Ethiopian high-school students, in Amharic and English. Every lesson is built from the national textbook: an AI pipeline drafts it from verified pages, each fact carries a citation back to its printed page, and a validator rejects anything it can't trace. Lessons are narrated in one consistent teacher voice and drawn as animated figures, with practice built in.</p>
         <div class="stack"><span>React Native</span><span>Expo</span><span>TypeScript</span><span>Skia</span><span>Supabase</span><span>pgvector</span><span>Chatterbox TTS</span></div>
-        <div class="go"><button class="btn primary mag" data-case="be-ai"><span class="dot"></span>Watch its ad</button><span class="status"><i></i>In development · Grade 9 in testing</span></div>
+        <div class="go"><button class="btn primary mag" data-to="#lessons"><span class="dot"></span>See the lessons</button><button class="btn ghost mag" data-case="be-ai">Watch its ad</button><span class="status"><i></i>In development · Grade 9 in testing</span></div>
       </div>
     </article>
+
+    <div class="lessons" id="lessons">
+      <div class="lhead">
+        <div class="rv"><span class="eyebrow">Inside Tibeb · Grade 9 Biology</span>
+          <h3>Lessons that teach one idea per page</h3></div>
+        <p class="lede rv" style="--d:1">These are real pages from the app, recorded as they play. Each page explains one idea, with a figure drawn for it and a teacher who talks the student through it. The figure builds in step with the voice. Tap a phone to hear it.</p>
+      </div>
+      <div class="phones" role="list" aria-label="Recorded Biology lesson pages">
+        <figure class="phone rv" role="listitem"><button type="button" aria-label="Play with sound: Six signs of life"><span class="scr"><video muted playsinline loop preload="none" poster="media/lessons/signs.jpg" data-src="media/lessons/signs.mp4"></video></span><span class="cap"><b>Six signs of life</b><span>What Is Biology? · page 5</span><span class="snd"><i></i>Tap for sound</span></span></button></figure>
+        <figure class="phone rv" style="--d:1" role="listitem"><button type="button" aria-label="Play with sound: Is fire alive?"><span class="scr"><video muted playsinline loop preload="none" poster="media/lessons/fire.jpg" data-src="media/lessons/fire.mp4"></video></span><span class="cap"><b>Is fire alive?</b><span>What Is Biology? · page 14</span><span class="snd"><i></i>Tap for sound</span></span></button></figure>
+        <figure class="phone rv" style="--d:2" role="listitem"><button type="button" aria-label="Play with sound: The scientific method in six steps"><span class="scr"><video muted playsinline loop preload="none" poster="media/lessons/method.jpg" data-src="media/lessons/method.mp4"></video></span><span class="cap"><b>Six steps, in order</b><span>The Scientific Method · page 4</span><span class="snd"><i></i>Tap for sound</span></span></button></figure>
+        <figure class="phone rv" style="--d:3" role="listitem"><button type="button" aria-label="Play with sound: Draw a bar graph"><span class="scr"><video muted playsinline loop preload="none" poster="media/lessons/graph.jpg" data-src="media/lessons/graph.mp4"></video></span><span class="cap"><b>Draw a bar graph</b><span>Testing a Hypothesis · page 14</span><span class="snd"><i></i>Tap for sound</span></span></button></figure>
+        <figure class="phone rv" style="--d:4" role="listitem"><button type="button" aria-label="Play with sound: The compound microscope"><span class="scr"><video muted playsinline loop preload="none" poster="media/lessons/scope.jpg" data-src="media/lessons/scope.mp4"></video></span><span class="cap"><b>The compound microscope</b><span>Seeing the Very Small · page 16</span><span class="snd"><i></i>Tap for sound</span></span></button></figure>
+        <figure class="phone rv" style="--d:5" role="listitem"><button type="button" aria-label="Play with sound: Six signs of life, in Amharic"><span class="scr"><video muted playsinline loop preload="none" poster="media/lessons/signs-am.jpg" data-src="media/lessons/signs-am.mp4"></video></span><span class="cap"><b>Six signs of life, in Amharic</b><span lang="am">ባዮሎጂ ምንድን ነው? · page 5</span><span class="snd"><i></i>Tap for sound</span></span></button></figure>
+      </div>
+      <div class="lnums rv">
+        <div><b>10</b><span class="eyebrow">Lessons built</span></div>
+        <div><b>156</b><span class="eyebrow">Narrated pages</span></div>
+        <div><b>2</b><span class="eyebrow">Languages, EN and Amharic</span></div>
+      </div>
+      <div class="lprin">
+        <div class="rv"><b>Textbook first</b><p>Every fact comes from the national Grade 9 Biology textbook. Anything a teacher adds is marked, and no exam answer rests on it.</p></div>
+        <div class="rv" style="--d:1"><b>One idea, one figure</b><p>Each page teaches a single idea. Its figure is drawn for that idea and moves with what the teacher is saying.</p></div>
+        <div class="rv" style="--d:2"><b>Built for the exam</b><p>Every page shows what the national exam asks about it, so students know what to remember.</p></div>
+        <div class="rv" style="--d:3"><b>Students do the thinking</b><p>Question pages ask before they explain and never show the answer early, so students have to think first.</p></div>
+      </div>
+      <div class="lcourse rv"><span class="eyebrow">Unit 1 · Introduction to Biology</span><span>What Is Biology?</span><span>Why Do We Study Biology?</span><span>The Scientific Method</span><span>Testing a Hypothesis</span><span>Seeing the Very Small</span><span>Tools for Growing Microbes</span><span>Lab and Field Tools</span><span>The Light Microscope</span><span>Using a Microscope</span><span>Laboratory Safety</span></div>
+    </div>
 
     <article class="sw">
       <a class="shot rv" href="https://urbanexplore.netlify.app/" target="_blank" rel="noopener" aria-label="Open the UrbanExplore live app">
@@ -943,6 +1002,29 @@ function splitWords(el){ let wi = 0;
     else if (c.nodeType === 1) walk(c); });
   walk(el); }
 if (!reduce) document.querySelectorAll('.split').forEach(splitWords);
+
+/* ---------- Tibeb lesson phones: muted loops while on screen, tap one to hear it from the start ---------- */
+(() => {
+  const phones = [...document.querySelectorAll('.phone')]; if (!phones.length) return;
+  let live = null;
+  const load = v => { if (!v.src && v.dataset.src) v.src = v.dataset.src; };
+  const label = (f, on) => { f.classList.toggle('on', on); f.querySelector('.snd').lastChild.textContent = on ? 'Sound on · tap to mute' : 'Tap for sound'; };
+  const mute = f => { const v = f.querySelector('video'); v.muted = true; v.loop = true; label(f, false); if (reduce) v.pause(); };
+  phones.forEach(f => {
+    const v = f.querySelector('video');
+    v.addEventListener('ended', () => { if (live === f) { live = null; mute(f); v.play().catch(() => {}); } });
+    f.querySelector('button').addEventListener('click', () => {
+      if (live === f) { live = null; mute(f); return; }
+      if (live) mute(live);
+      live = f; load(v); v.loop = false; v.muted = false; v.currentTime = 0; label(f, true);
+      v.play().catch(() => { live = null; mute(f); });
+    });
+  });
+  if (reduce || !('IntersectionObserver' in window)) return;
+  const seen = new IntersectionObserver(es => es.forEach(e => { const f = e.target, v = f.querySelector('video');
+    if (e.isIntersecting) { load(v); v.play().catch(() => {}); } else { if (live === f) { live = null; mute(f); } v.pause(); } }), {threshold:.35});
+  phones.forEach(f => seen.observe(f));
+})();
 
 /* ---------- scroll reveals ---------- */
 const REVEAL = '.rv,.head,.split,.stats';
